@@ -3,6 +3,7 @@ import "./App.css";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import "react-toastify/dist/ReactToastify.css";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -15,13 +16,20 @@ function App() {
           <button>Auth</button>
         </Link>
         <Link to="/dashboard">
-          <button >Dashboard</button>
+          <button>Dashboard</button>
         </Link>
       </div>
       <Routes>
         <Route path="/" element={<Navigate to="/auth" replace />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );
